@@ -1,0 +1,38 @@
+drop database if exists storehouses;
+create database storehouses;
+use storehouses;
+
+drop table if exists products;
+create table products(
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+    product_name VARCHAR(50) NOT NULL,
+    how_many INT UNSIGNED NOT NULL
+);
+drop table if exists products1;
+create table products1(
+    id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY, 
+    product_name VARCHAR(50) NOT NULL,
+    how_many INT UNSIGNED NOT NULL
+);
+
+insert into products1(product_name, how_many) 
+value 
+('book', '12'),
+('computer', '13'),
+('chees', '0'),
+('butter', '100'),
+('pen', '168'),
+('bag', '53'),
+('mug', '5'),
+('cake', '7'),
+('car', '2'),
+('dvd', '0');
+
+insert into products select * from products1 where how_many > 0 
+order by how_many;
+
+-- insert into products 
+-- select * from products order by how_many;
+
+insert into products
+select * from products1 where how_many = 0;
